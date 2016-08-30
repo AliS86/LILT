@@ -1,6 +1,6 @@
 angular.module('app.routes', ['ionicUIRouter'])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
@@ -28,12 +28,14 @@ angular.module('app.routes', ['ionicUIRouter'])
     views: {
       'tab1': {
         templateUrl: 'templates/lILT.html',
-        controller: 'lILTCtrl'
+        controller: 'AuthController',
+        controllerAs: 'vm'
       },
-      'tab2': {
-        templateUrl: 'templates/lILT.html',
-        controller: 'lILTCtrl'
-      }
+     'tab2': {
+        templateUrl: 'templates/lILTStory.html',
+         controller: 'AuthController',
+        controllerAs: 'vm'
+     }
     }
   })
 
@@ -68,7 +70,7 @@ angular.module('app.routes', ['ionicUIRouter'])
   })
 
   .state('tabsController.pROFILE', {
-    url: '/profile',
+    url: '/profile/:image',
     views: {
       'tab6': {
         templateUrl: 'templates/pROFILE.html',
@@ -77,10 +79,11 @@ angular.module('app.routes', ['ionicUIRouter'])
     }
   })
 
-  .state('startPage', {
-    url: '/register',
+  .state('login', {
+    url: '/login',
     templateUrl: 'templates/startPage.html',
-    controller: 'startPageCtrl'
+    controller: 'AuthController',
+    controllerAs: 'vm'
   })
 
   .state('tabsController', {
@@ -90,9 +93,10 @@ angular.module('app.routes', ['ionicUIRouter'])
   })
 
   .state('register', {
-    url: '/page9',
+    url: '/register',
     templateUrl: 'templates/register.html',
-    controller: 'registerCtrl'
+    controller: 'AuthController',
+    controllerAs: 'vm'
   })
 
   .state('tabsController.singleStory', {
@@ -100,7 +104,8 @@ angular.module('app.routes', ['ionicUIRouter'])
     views: {
       'tab2': {
         templateUrl: 'templates/singleStory.html',
-        controller: 'singleStoryCtrl'
+        controller: 'singleStoryCtrl',
+        controllerAs: 'vm'
       }
     }
   })
@@ -135,7 +140,7 @@ angular.module('app.routes', ['ionicUIRouter'])
     }
   })
 
-$urlRouterProvider.otherwise('/register')
+$urlRouterProvider.otherwise('login')
 
   
 

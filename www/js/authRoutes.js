@@ -1,8 +1,8 @@
 var express = require('express');
 var app = express();
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var config = require('../config'); // get our config file
-var User = require('../app/models/user'); // get our mongoose model
+var config = require('./config'); // get our config file
+var User = require('./user'); // get our mongoose model
 app.set('superSecret', config.secret); // secret variable
 
 // Authentication and authorization routes
@@ -81,6 +81,11 @@ authRoutes.post('/authenticate', function(req, res, next) {
         err.status = 401;
         return next(err);
     }
+});
+
+authRoutes.get('/logout', function (req, res) {
+  delete req.session.authStatus;
+
 });
 
 module.exports = authRoutes;

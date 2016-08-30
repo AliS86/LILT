@@ -1,12 +1,32 @@
 <ion-view title="Single Story" hide-back-button="true" id="page10" class=" ">
     <ion-content ng-controller="MainCtrl" padding="true" class="has-header">
         <div class="spacer" style="height: 10px;"></div>
-        <img ng-src="{{srcImage || 'img/pic1.jpg'}}" id="srcImage" width="250 " height="250" style="display: block; margin: 0 auto;" />
+        <div>
+            <div id="image-table">
+                <table>
+                    <tr>
+                        <td style="padding:3px">
+                            <div >
+                                <img ng-src="{{srcImage || 'img/pic2.jpeg'}}" id="srcImage" width="100%" height="250" style="display: block; " />
+                                <button class="button button-positive " ng-click="takeImage()" style="margin-left:35%;">Take Image</button>
+                            </div>
+                        </td>
+                        <!--  <td style="padding:3px">
+                    <div ng-controller="VideoCtrl">
+                        <img ng-src="{{urlForClipThumb(clip)}}" ng-click="showClip(clip)" style="height: 250px; width: 250px;">
+                         <button class="button button-positive" ng-click="captureVideo()">Capture a video</button>
+                         </div>
+                    </td> -->
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
+                <img ng-repeat="image in images" ng-src="{{srcImage}}" style="height:200px; padding: 5px 5px 5px 5px;">
+            </ion-scroll>
+        </div>
         <br/>
-        <button class="button button-full button-positive " ng-click="takeImage() ">Take Image</button>
-        <br/>
-        <a href="#/page1/tab1/home" id="singleStory-button19" class=" button button-positive  button-block button-outline ">End Story</a>
+        <a ui-sref="tabsController.pROFILE({image: srcImage})" id="singleStory-button19" class=" button button-positive  button-block button-outline ">Post</a>
         <a href="#/page1/tab1/home" id="singleStory-button20" class=" button button-positive  button-block button-outline ">Cancel</a>
-        
     </ion-content>
 </ion-view>

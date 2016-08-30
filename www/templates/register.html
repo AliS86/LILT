@@ -3,23 +3,23 @@
         <form id="register-form5" class="list ">
             <ion-list id="register-list6" class=" ">
                 <label class="item item-input " id="register-input13">
-                    <input type="email" placeholder="Email">
+                    <input type="email" placeholder="Email" ng-model="vm.newEmail">
                 </label>
                 <label class="item item-input " id="register-input14">
-                    <input type="text" placeholder="Full Name">
+                    <input type="text" placeholder="Full Name" ng-model="vm.newFullName">
                 </label>
                 <label class="item item-input " id="register-input10">
-                    <input type="text" placeholder="User Name">
+                    <input type="text" placeholder="User Name" ng-model="vm.newUserName">
                 </label>
                 <label class="item item-input " id="register-input11">
-                    <input type="password" placeholder="Password">
+                    <input type="password" placeholder="Password" ng-model="vm.newPassword">
                 </label>
                 <label class="item item-input " id="register-input12">
-                    <input type="password" placeholder="Retype Password">
+                    <input type="password" placeholder="Retype Password" ng-model="vm.newConfirmPassword">
                 </label>
             </ion-list>
             <div class="spacer" style="width: 300px; height: 69px;"></div>
-            <a ui-sref="tabsController.lILT_tab1" id="register-button5" style="border-radius:21px 21px 21px 21px;" class=" button button-positive  button-block ">Sign up</a>
+            <button  id="register-button5" style="border-radius:21px 21px 21px 21px;" class=" button button-positive  button-block" ng-click="vm.registerUser(vm.newEmail, vm.newFullName, vm.newUserName, vm.newPassword, vm.newConfirmPassword)">Sign up</button>
         </form>
     </ion-content>
 </ion-view>

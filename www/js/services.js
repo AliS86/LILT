@@ -1,20 +1,18 @@
-// angular.module('app.services', [])
+(function() {
+    'use strict';
 
-// .factory('BlankFactory', [function(){
-
-// }])
-
-// .service('BlankService', [function(){
-
-// }]);
-
+    angular
+        .module('app')
+        .factory('AuthFactory', AuthFactory);
+    var images;
+    var IMAGE_STORAGE_KEY = 'images';
 
 
+    AuthFactory.$inject = ['$http', '$q'];
 
-angular.module('app.services', [])
-
-.factory('Services', [function($http, $q, localStorageService, apiUrl){
-	var service = {
+    /* @ngInject */
+    function AuthFactory($http, $q) {
+        var service = {
             registerUser: registerUser,
             loginUser: loginUser,
             logoutUser: logoutUser
@@ -23,78 +21,70 @@ angular.module('app.services', [])
 
         ////////////////
 
-        //Checks user confirm password and then uses POST HTTP call to register user in database
         function registerUser(email, fullName, username, password, confirmPassword) {
-
             var defer = $q.defer();
 
-            if (password !== confirmPassword){
-                defer.reject("Password must match Confirm Password.");
+            if (password !== confirmPassword) {
+                defer.reject('Password must match Confirm Password.');
 
                 return defer.promise;
             }
-
-            var newUser = {emailAddress: userEmail, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, phoneNumber: phoneNumber};
+            var newUser = { email: email, fullName: fullName, username: username, password: password, confirmPassword: confirmPassword }
 
             $http({
-                    method: 'POST',
-                    url: apiUrl + 'accounts/register',
-                    headers: {
-                        'Content-Type': 'application/json; charset=utf-8'
-                    },
-                    data: newUser
-                }).then(function(response) {
-                        if (response.status === 200) {
-                            defer.resolve(response);
-                        } else {
-                            defer.reject("No data found!");
-                        }
-                    },
-                    function(error) {
-                        defer.reject("Email Address has already been used!");
-                    });
-
-                return defer.promise;
+                method: 'POST',
+                url: 'https://liltfinalproject.herokuapp.com/api/register', // 'http://localhost:8080/api/register',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                data: newUser
+            }).then(function(response) {
+                    if (response.status === 200) {
+                        defer.resolve(response);
+                    } else {
+                        defer.reject('No data found!');
+                    }
+                },
+                function(error) {
+                    defer.reject('Email Address has already been used!');
+                });
+            return defer.promise;
         }
 
-        //Uses POST HTTP call to send login information to server and return authentication token
-        function loginUser(loginEmail, loginPassword){
+        // function to login user making an HTTP call to the server
+        function loginUser(loginEmail, loginPassword) {
             var defer = $q.defer();
 
-            var data = "grant_type=password&username=" + loginEmail + "&password=" + loginPassword;
+            var data = "grant_type=password&email=" + loginEmail + "&password=" + loginPassword;
 
             $http({
-                    method: 'POST',
-                    url: apiUrl + 'token',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    data: data
-                }).then(function(response) {
-                        if (response.status === 200) {
+                method: 'POST',
+                url: 'https://liltfinalproject.herokuapp.com/api/authenticate', //'http://localhost:8080/api/authenticate',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                },
+                data: data
+            }).then(function(response) {
+                    if (response.status === 200) {
 
-                            //Stores access token and username on successful login
-                            localStorageService.set('access_token', response.data.access_token);
-                            localStorageService.set('username', loginEmail);
+                        //Stores access token and username on successful login
+                        // localStorageService.set('access_token', response.data.access_token);
+                        // localStorageService.set('email', loginEmail);
 
-                            defer.resolve(response);
-                        } else {
-                            defer.reject("No data found!");
-                        }
-                    },
-                    function(error) {
-                        defer.reject(error);
-                    });
+                        defer.resolve(response);
+                    } else {
+                        defer.reject("No data found!");
+                    }
+                },
+                function(error) {
+                    defer.reject(error);
+                });
 
-                return defer.promise;
+            return defer.promise;
         }
-
-        //Defining method for logging users out by clearing out access token from local storage
         function logoutUser(){
-            localStorageService.clearAll();
-
+            delete req.session.token;
         }
-   
-}]);
+    }
 
-
+})();

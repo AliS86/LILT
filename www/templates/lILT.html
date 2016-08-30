@@ -1,3 +1,7 @@
-<ion-view title="LILT" hide-back-button="true" id="page2" style="background-color:#FFFFFF;" class=" ">
-    <ion-content padding="true" class="has-header"></ion-content>
+<ion-view title="LILT" hide-back-button="true" id="page2" style="background-color:lightblue;" class=" ">
+    <ion-content ng-controller="MainCtrl" padding="true" class="has-header"></ion-content>
+    <br>
+    <ion-pane>
+       <img ng-src="{{srcImage || 'img/pic4.jpeg'}}" id="srcImage" width="100% " height="100%" style="display: block; " />
+    </ion-pane>
 </ion-view>

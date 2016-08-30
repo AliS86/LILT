@@ -1,7 +1,7 @@
 var express     = require('express');
 var app         = express();
 var jwt    		= require('jsonwebtoken'); // used to create, sign, and verify tokens
-var config 		= require('../config'); // get our config file
+var config 		= require('./config'); // get our config file
 
 // route middleware to verify a token
 function requiresToken(req,res, next) {

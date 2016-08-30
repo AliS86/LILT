@@ -17,13 +17,13 @@ function($scope, $cordovaCamera) {
 
     
         var options = {
-            quality: 80,
+            quality: 400,
             destinationType: Camera.DestinationType.DATA_URL,
             sourceType: Camera.PictureSourceType.CAMERA,
             allowEdit: true,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 250,
-            targetHeight: 250,
+            targetWidth: 400,
+            targetHeight: 300,
             popoverOptions: CameraPopoverOptions,
             saveToPhotoAlbum: false
         };
