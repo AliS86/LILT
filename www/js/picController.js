@@ -5,12 +5,13 @@
         .module('app')
         .controller('picController', picController);
 
-    Controller.$inject = ['$state', '$stateParams'];
+    picController.$inject = ['$state', '$stateParams'];
 
     /* @ngInject */
-    function Controller($state, $stateParams) {
+    function picController($state, $stateParams) {
         var vm = this;
         vm.image = 'picController';
+        vm.id = $stateParams.id;
 
         activate();
 

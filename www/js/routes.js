@@ -70,11 +70,11 @@ angular.module('app.routes', ['ionicUIRouter'])
   })
 
   .state('tabsController.pROFILE', {
-    url: '/profile/:image',
+    url: '/profile/:id',
     views: {
       'tab6': {
         templateUrl: 'templates/pROFILE.html',
-        controller: 'pROFILECtrl'
+        controller: 'picController'
       }
     }
   })
@@ -104,7 +104,7 @@ angular.module('app.routes', ['ionicUIRouter'])
     views: {
       'tab2': {
         templateUrl: 'templates/singleStory.html',
-        controller: 'singleStoryCtrl',
+        controller: 'picController',
         controllerAs: 'vm'
       }
     }
