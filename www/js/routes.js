@@ -74,7 +74,8 @@ angular.module('app.routes', ['ionicUIRouter'])
     views: {
       'tab6': {
         templateUrl: 'templates/pROFILE.html',
-        controller: 'picController'
+        controller: 'picController',
+        controllerAs: 'vm'
       }
     }
   })
